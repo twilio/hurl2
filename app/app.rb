@@ -179,7 +179,7 @@ module Hurl
              :prev_hurl => @user ? @user.second_to_last_hurl_id : nil,
              :view_id   => save_view(header, body, request)
       rescue => e
-        json :error => e.to_s
+        json :error => CGI::escapeHTML(e.to_s)
       end
     end
 
@@ -203,7 +203,15 @@ module Hurl
 
     # is this a url hurl can handle. basically a spam check.
     def invalid_url?(url)
-      url.include? 'hurl.it'
+      valid_schemes = ['http', 'https']
+      begin
+        uri = URI.parse(url)
+        raise URI::InvalidURIError if uri.host == 'hurl.it'
+        raise URI::InvalidURIError if !valid_schemes.include? uri.scheme
+        false
+      rescue URI::InvalidURIError
+        true
+      end
     end
 
     # update auth based on auth type
