@@ -194,9 +194,7 @@ $(document).ready(function() {
     $('.flash-error, .flash-notice').fadeOut()
     $('#request-and-response').hide()
 
-    $(this).hurlAjaxSubmit(function(res) {
-      var data = JSON.parse(res)
-
+    $(this).hurlAjaxSubmit(function(data) {
       if (data.error) {
         $('#flash-error-msg').html(data.error)
         $('.flash-error').show()
