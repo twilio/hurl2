@@ -96,9 +96,8 @@
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
     var aDays = new Array( "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
-    var dtm = new String();
 
-    dtm = aDays[oDate.getDay()] + ", ";
+    var dtm = aDays[oDate.getDay()] + ", ";
     dtm += padWithZero(oDate.getDate()) + " ";
     dtm += aMonths[oDate.getMonth()] + " ";
     dtm += oDate.getFullYear() + " ";
